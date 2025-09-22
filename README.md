@@ -20,7 +20,6 @@ It handles bookings, payments, app issues, and promotes **eco-friendly ride opti
 ## 🏗️ Architecture
 The agent uses a **multi-node decision flow**:
 
-```mermaid
 flowchart TD
     A[Start Node] --> B[User Input]
     B --> C{Decision: Eco or Standard?}
