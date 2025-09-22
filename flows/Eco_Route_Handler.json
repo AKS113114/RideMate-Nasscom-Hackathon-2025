@@ -1,0 +1,385 @@
+{
+  "id": "68c4b3d0d7afad2a76e65a84",
+  "autoLayout": true,
+  "description": "",
+  "name": "Eco_Route_Handler",
+  "nodesList": [
+    {
+      "position": {
+        "x": 570,
+        "y": 45
+      },
+      "defaultNodeConfig": {
+        "name": "Start Node",
+        "temperature": 0.5,
+        "messageType": "STATIC",
+        "messageOrPrompt": "🌱 *Welcome to Gnani Eco-Routes!*  \nI help you book sustainable rides with carbon savings.  \n\nNeed:  \n- Green ride booking  \n- CO2 impact tracking  \n- Eco-route options  \n\nJust say \"book green ride\" or ask about emissions!",
+        "knowledgeBaseIds": []
+      },
+      "width": 335,
+      "height": 183,
+      "hasError": false,
+      "selected": false,
+      "measured": {
+        "width": 335,
+        "height": 183
+      },
+      "nodeId": "575740a6bcad3f44cb3c",
+      "type": "START",
+      "data": {
+        "label": "",
+        "description": ""
+      }
+    },
+    {
+      "position": {
+        "x": 563,
+        "y": 315
+      },
+      "userNodeConfig": {
+        "name": "User Input"
+      },
+      "width": 335,
+      "height": 165,
+      "selected": false,
+      "measured": {
+        "width": 335,
+        "height": 165
+      },
+      "nodeId": "2ada82ec3f3d020d0814",
+      "type": "USER",
+      "data": {
+        "label": "",
+        "description": ""
+      }
+    },
+    {
+      "position": {
+        "x": 660,
+        "y": 615
+      },
+      "decisionNodeConfig": {
+        "prompt": "Route the conversation based on the user's intent. If the input contains words like 'green', 'eco', 'sustainable', 'carbon', route to 'Eco_Route_Handler'. Otherwise route to 'Standard_Booking_Agent'.",
+        "repeatEnabled": false,
+        "repeatMaxCount": 1,
+        "knowledgeBaseIds": [
+          "3cf97b20f3dc4cb8b199fc352df35637"
+        ]
+      },
+      "width": 69,
+      "height": 69,
+      "hasError": false,
+      "selected": false,
+      "measured": {
+        "width": 69,
+        "height": 69
+      },
+      "nodeId": "7d81d0843eb0da9fba08",
+      "type": "DECISION",
+      "data": {
+        "label": "",
+        "description": ""
+      }
+    },
+    {
+      "position": {
+        "x": 315,
+        "y": 825
+      },
+      "defaultNodeConfig": {
+        "name": "Eco_Route_Handler",
+        "temperature": 0.5,
+        "messageType": "PROMPT",
+        "messageOrPrompt": "Calculate the most eco-friendly route and CO2 savings. Return JSON with 'eco_route_details' and 'co2_saved_g'.",
+        "action": "TRIGGER_AGENT_CHAIN",
+        "knowledgeBaseIds": [
+          "eco_data_kb"
+        ]
+      },
+      "width": 335,
+      "height": 183,
+      "hasError": false,
+      "selected": false,
+      "measured": {
+        "width": 335,
+        "height": 183
+      },
+      "nodeId": "89c581ec9c6b1af846a4",
+      "type": "DEFAULT",
+      "data": {
+        "label": "",
+        "description": ""
+      }
+    },
+    {
+      "position": {
+        "x": 810,
+        "y": 825
+      },
+      "defaultNodeConfig": {
+        "name": "Standard_Booking_Agent",
+        "temperature": 0.5,
+        "messageType": "STATIC",
+        "messageOrPrompt": "Connecting you to our standard booking service. Please hold on while we confirm your ride details.",
+        "action": "TRIGGER_AGENT_CHAIN",
+        "knowledgeBaseIds": []
+      },
+      "width": 335,
+      "height": 183,
+      "hasError": false,
+      "selected": false,
+      "measured": {
+        "width": 335,
+        "height": 183
+      },
+      "nodeId": "71fb12e529c892222563",
+      "type": "DEFAULT",
+      "data": {
+        "label": "",
+        "description": ""
+      }
+    },
+    {
+      "position": {
+        "x": 570,
+        "y": 1125
+      },
+      "defaultNodeConfig": {
+        "name": "Ride_Confirmer",
+        "temperature": 0.5,
+        "messageType": "PROMPT",
+        "messageOrPrompt": "✅ Your ride is confirmed! You saved {{co2_saved}}g CO2 compared to a standard ride. Your driver will arrive shortly.",
+        "action": null,
+        "knowledgeBaseIds": []
+      },
+      "width": 335,
+      "height": 183,
+      "hasError": false,
+      "selected": false,
+      "measured": {
+        "width": 335,
+        "height": 183
+      },
+      "nodeId": "converge_node_12345",
+      "type": "DEFAULT",
+      "data": {
+        "label": "",
+        "description": ""
+      }
+    },
+    {
+      "position": {
+        "x": 570,
+        "y": 1365
+      },
+      "defaultNodeConfig": {
+        "name": "SMS_Confirmer",
+        "temperature": 0.5,
+        "messageType": "STATIC",
+        "messageOrPrompt": "🌿 Your ride is confirmed! Saving {{co2_saved}}g CO2 vs standard route. Track impact: gnani.ai/eco",
+        "action": "SEND_SMS",
+        "knowledgeBaseIds": []
+      },
+      "width": 335,
+      "height": 183,
+      "hasError": false,
+      "selected": false,
+      "dragging": false,
+      "measured": {
+        "width": 335,
+        "height": 183
+      },
+      "nodeId": "a5ccadcf54807b179d83",
+      "type": "DEFAULT",
+      "data": {
+        "label": "",
+        "description": ""
+      }
+    },
+    {
+      "position": {
+        "x": 570,
+        "y": 1590
+      },
+      "eventNodeConfig": {
+        "name": "End Node",
+        "temperature": 0.5,
+        "messageType": "STATIC",
+        "messageOrPrompt": "✅ Your ride is confirmed! You saved {{co2_saved}}g CO2.  \nA confirmation SMS has been sent to your phone.  \nThank you for choosing an eco-friendly ride 🌱\n",
+        "action": "",
+        "knowledgeBaseIds": [],
+        "eventNodeType": "RESET",
+        "transferPhoneNumber": ""
+      },
+      "width": 335,
+      "height": 189,
+      "hasError": false,
+      "selected": false,
+      "dragging": false,
+      "measured": {
+        "width": 335,
+        "height": 189
+      },
+      "nodeId": "endnode1234567890abcdef",
+      "type": "EVENT",
+      "data": {
+        "label": "",
+        "description": ""
+      }
+    }
+  ],
+  "edgesList": [
+    {
+      "edgeId": "edge_start_to_user",
+      "hasError": false,
+      "data": {
+        "description": "",
+        "label": ""
+      },
+      "type": "genvoice_edge",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "height": 25,
+        "width": 20
+      },
+      "source": "575740a6bcad3f44cb3c",
+      "sourceHandle": "source-bottom",
+      "target": "2ada82ec3f3d020d0814",
+      "targetHandle": "target-top",
+      "selected": false
+    },
+    {
+      "edgeId": "edge_user_to_decision",
+      "hasError": false,
+      "data": {
+        "description": "Passes user input to decision logic",
+        "label": ""
+      },
+      "type": "genvoice_edge",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "height": 25,
+        "width": 20
+      },
+      "source": "2ada82ec3f3d020d0814",
+      "sourceHandle": "source-bottom",
+      "target": "7d81d0843eb0da9fba08",
+      "targetHandle": "target-top",
+      "selected": false
+    },
+    {
+      "edgeId": "edge_decision_to_eco",
+      "hasError": false,
+      "data": {
+        "description": "User requested eco ride",
+        "label": "BOOK_GREEN"
+      },
+      "type": "genvoice_edge",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "height": 25,
+        "width": 20
+      },
+      "source": "7d81d0843eb0da9fba08",
+      "sourceHandle": "source-left",
+      "target": "89c581ec9c6b1af846a4",
+      "targetHandle": "target-top",
+      "selected": false
+    },
+    {
+      "edgeId": "edge_decision_to_standard",
+      "hasError": false,
+      "data": {
+        "description": "User requested standard ride",
+        "label": "BOOK_STANDARD"
+      },
+      "type": "genvoice_edge",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "height": 25,
+        "width": 20
+      },
+      "source": "7d81d0843eb0da9fba08",
+      "sourceHandle": "source-right",
+      "target": "71fb12e529c892222563",
+      "targetHandle": "target-top",
+      "selected": false
+    },
+    {
+      "edgeId": "edge_eco_to_converge",
+      "hasError": false,
+      "data": {
+        "description": "Passes CO2 data to confirmation",
+        "label": "With CO2 Data"
+      },
+      "type": "genvoice_edge",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "height": 25,
+        "width": 20
+      },
+      "source": "89c581ec9c6b1af846a4",
+      "sourceHandle": "source-bottom",
+      "target": "converge_node_12345",
+      "targetHandle": "target-top",
+      "selected": false
+    },
+    {
+      "edgeId": "edge_standard_to_converge",
+      "hasError": false,
+      "data": {
+        "description": "Proceeds to confirmation",
+        "label": "Standard Booking"
+      },
+      "type": "genvoice_edge",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "height": 25,
+        "width": 20
+      },
+      "source": "71fb12e529c892222563",
+      "sourceHandle": "source-bottom",
+      "target": "converge_node_12345",
+      "targetHandle": "target-top",
+      "selected": false
+    },
+    {
+      "edgeId": "edge_converge_to_sms",
+      "hasError": false,
+      "data": {
+        "description": "Trigger SMS after confirmation message",
+        "label": ""
+      },
+      "type": "genvoice_edge",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "height": 25,
+        "width": 20
+      },
+      "source": "converge_node_12345",
+      "sourceHandle": "source-bottom",
+      "target": "a5ccadcf54807b179d83",
+      "targetHandle": "target-top",
+      "selected": false
+    },
+    {
+      "edgeId": "edge_sms_to_end",
+      "hasError": false,
+      "data": {
+        "description": "Conversation terminates after SMS",
+        "label": "END"
+      },
+      "type": "genvoice_edge",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "height": 25,
+        "width": 20
+      },
+      "source": "a5ccadcf54807b179d83",
+      "sourceHandle": "source-bottom",
+      "target": "endnode1234567890abcdef",
+      "targetHandle": "target-top",
+      "selected": false
+    }
+  ]
+}
