@@ -3,7 +3,6 @@
 **Flow name:** `Eco_Route_Handler.json`  
 **Project:** RideMate — AI-Powered Sustainable Mobility Support
 
----
 
 ## 🔹 High-level flow (Mermaid)
 ```mermaid
