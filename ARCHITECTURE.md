@@ -1,38 +1,22 @@
-\# 🏗️ RideMate Architecture
+# 🏗️ RideMate Architecture
 
-
-
-This document explains the agent-chain architecture used in the \*\*Eco\_Route\_Handler\*\* flow.
-
-
+**Flow name:** `Eco_Route_Handler.json`  
+**Project:** RideMate — AI-Powered Sustainable Mobility Support
 
 ---
 
-
-
-\## 🔹 Flow (Mermaid Diagram)
-
-
-
+## 🔹 High-level flow (Mermaid)
 ```mermaid
-
 flowchart TD
+    A[Start Node] --> B[User Input]
+    B --> C{Decision: Eco or Standard?}
+    C -->|BOOK_GREEN| D[Eco_Route_Handler]
+    C -->|BOOK_STANDARD| E[Standard_Booking_Agent]
+    D --> F[Ride_Confirmer]
+    E --> F[Ride_Confirmer]
+    F --> G[SMS_Confirmer]
+    G --> H[End Node (EOC)]
 
-&nbsp;   A\[Start Node] --> B\[User Input]
-
-&nbsp;   B --> C{Decision: Eco or Standard?}
-
-&nbsp;   C -->|BOOK\_GREEN| D\[Eco\_Route\_Handler]
-
-&nbsp;   C -->|BOOK\_STANDARD| E\[Standard\_Booking\_Agent]
-
-&nbsp;   D --> F\[Ride\_Confirmer]
-
-&nbsp;   E --> F\[Ride\_Confirmer]
-
-&nbsp;   F --> G\[SMS\_Confirmer]
-
-&nbsp;   G --> H\[End Node (EOC)]
 
 
 
