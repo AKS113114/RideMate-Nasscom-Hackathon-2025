@@ -5,7 +5,7 @@
 
 
 ## 🔹 High-level flow (Mermaid)
-```mermaid
+
 flowchart TD
     A[Start Node] --> B[User Input]
     B --> C{Decision: Eco or Standard?}
