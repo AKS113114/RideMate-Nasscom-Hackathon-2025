@@ -1,9 +1,7 @@
 from flask import Flask, request, jsonify
-import requests
 import os
 
 app = Flask(__name__)
-GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 
 @app.route('/eco-route', methods=['GET'])
 def get_eco_route():
@@ -14,42 +12,39 @@ def get_eco_route():
         if not origin or not destination:
             return jsonify({'error': 'Missing origin or destination'}), 400
         
-        # Call Google Maps API
-        url = "https://maps.googleapis.com/maps/api/directions/json"
-        params = {
-            'origin': origin,
-            'destination': destination,
-            'alternatives': 'true',
-            'key': GOOGLE_API_KEY
-        }
+        # MOCK DATA FOR DEMO - ALWAYS WORKS!
+        # Simulates real Google Maps response
+        mock_responses = [
+            {
+                'eta_minutes': 26,
+                'distance_km': 12.5,
+                'co2_savings': 'Saves 0.6kg CO2 compared to standard routes',
+                'message': f'Eco-route found! 12.5 km in 26 mins from {origin} to {destination}',
+                'status': 'success'
+            },
+            {
+                'eta_minutes': 38,
+                'distance_km': 18.5,
+                'co2_savings': 'Saves 3.7kg CO2 compared to standard routes',
+                'message': f'Eco-route found! 18.5 km in 38 mins from {origin} to {destination}',
+                'status': 'success'
+            },
+            {
+                'eta_minutes': 45,
+                'distance_km': 22.3,
+                'co2_savings': 'Saves 4.5kg CO2 compared to standard routes',
+                'message': f'Eco-route found! 22.3 km in 45 mins from {origin} to {destination}',
+                'status': 'success'
+            }
+        ]
         
-        response = requests.get(url, params=params)
-        data = response.json()
-        
-        if data['status'] != 'OK':
-            return jsonify({'error': 'Google Maps API error: ' + data['status']}), 500
-        
-        # Find shortest route (most eco-friendly)
-        if not data['routes']:
-            return jsonify({'error': 'No routes found'}), 404
-            
-        eco_route = min(data['routes'], 
-                       key=lambda x: x['legs'][0]['distance']['value'])
-        
-        leg = eco_route['legs'][0]
-        distance_km = leg['distance']['value'] / 1000
-        duration_mins = leg['duration']['value'] // 60
-        
-        # Calculate CO2 savings (simplified: 0.2kg CO2 per km saved)
-        co2_saved = distance_km * 0.2
-        
-        return jsonify({
-            'eta_minutes': duration_mins,
-            'distance_km': round(distance_km, 1),
-            'co2_savings': f"Saves {co2_saved:.1f}kg CO2 compared to standard routes",
-            'message': f"Eco-route found! {leg['distance']['text']} in {leg['duration']['text']}",
-            'status': 'success'
-        })
+        # Return different mock data based on origin (for realistic demo)
+        if 'delhi' in origin.lower() or 'airport' in destination.lower():
+            return jsonify(mock_responses[1])
+        elif 'mumbai' in origin.lower():
+            return jsonify(mock_responses[2])
+        else:
+            return jsonify(mock_responses[0])
         
     except Exception as e:
         return jsonify({'error': str(e)}), 500
