@@ -30,3 +30,13 @@ flowchart TD
     F --> G[SMS_Confirmer]
     G --> H[End Node (EOC)]
 
+---
+
+## 🚀 Live Demo
+
+**API Endpoint:** `https://ridemate-nasscom-hackathon-2025-production.up.railway.app`
+
+Test the eco-route feature:
+```bash
+curl "https://ridemate-nasscom-hackathon-2025-production.up.railway.app/eco-route?origin=Delhi&destination=Mumbai"
+
